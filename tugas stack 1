@@ -1,0 +1,27 @@
+class KonversiDesimal {
+  int desimal; //Atribut untuk menyimpan nilai desimal
+
+  KonversiDesimal(this.desimal);
+
+  String keBiner() { // Metode untuk mengonversi desimal ke biner
+    return desimal.toRadixString(2);
+  }
+
+  String keOktal() { // Metode untuk mengonversi desimal ke oktal
+    return desimal.toRadixString(8);
+  }
+
+  String keHeksadesimal() { // Metode untuk mengonversi desimal ke heksadesimal
+    return desimal.toRadixString(16).toUpperCase();
+  }
+}
+
+void main() { 
+  int nilaiInput = 24; // Nilai desimal yang ingin dikonversi
+  KonversiDesimal konverter = KonversiDesimal(nilaiInput);
+
+  print('Masukkan nilai desimal = $nilaiInput'); //
+  print('Hasil nilai biner = ${konverter.keBiner()}'); 
+  print('Hasil nilai oktal = ${konverter.keOktal()}');
+  print('Hasil nilai heksadesimal = ${konverter.keHeksadesimal()}');
+}
