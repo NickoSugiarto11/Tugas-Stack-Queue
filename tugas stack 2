@@ -1,0 +1,24 @@
+import 'dart:io';
+
+void main() {
+  stdout.write('Masukkan kalimat : '); //Mengambil input dari pengguna
+  String kalimat = stdin.readLineSync()!; 
+
+  String kalimatTerbalik = balikKalimat(kalimat); //Fungsi untuk membalikkan kalimat
+  print('Hasil = $kalimatTerbalik');
+
+  if (isPalindrom(kalimat)) {
+    print('Palindrom');
+  } else {
+    print('Bukan palindrom');
+  }
+}
+
+String balikKalimat(String input) { // Fungsi untuk membalikkan kalimat
+  return input.split('').reversed.join(); 
+}
+
+bool isPalindrom(String input) {
+  String processed = input.replaceAll(' ', '').toLowerCase();
+  return processed == balikKalimat(processed);
+}
