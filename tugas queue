@@ -1,0 +1,84 @@
+import 'dart:io';
+
+class Antrian {
+  final int kapasitas;
+  final List<String> _daftarAntrian = [];
+
+  Antrian(this.kapasitas);
+
+  void tambahPelanggan(String nama) {
+    if (_daftarAntrian.length >= kapasitas) {
+      print("Antrian penuh! Tidak bisa menambahkan $nama");
+    } else {
+      _daftarAntrian.add(nama);
+      print("$nama telah ditambahkan ke antrian");
+    }
+  }
+
+  String? panggilPelanggan() {
+    if (_daftarAntrian.isEmpty) {
+      print("Antrian kosong");
+      return null;
+    }
+    return _daftarAntrian.removeAt(0);
+  }
+
+  void tampilkanAntrian() {
+    if (_daftarAntrian.isEmpty) {
+      print("Antrian kosong");
+    } else {
+      print("\n=== DAFTAR ANTRIAN ===");
+      for (int i = 0; i < _daftarAntrian.length; i++) {
+        print("${i + 1}. ${_daftarAntrian[i]}");
+      }
+      print("=====================\n");
+    }
+  }
+
+  bool isPenuh() => _daftarAntrian.length >= kapasitas;
+
+  bool isKosong() => _daftarAntrian.isEmpty;
+}
+
+void main() {
+  stdout.write("Masukkan kapasitas antrian: ");
+  int kapasitas = int.parse(stdin.readLineSync()!);
+  Antrian antrian = Antrian(kapasitas);
+
+  while (true) {
+    print("\n=== MENU ANTRIAN ===");
+    print("1. Tambah pelanggan");
+    print("2. Panggil pelanggan");
+    print("3. Tampilkan antrian");
+    print("4. Keluar");
+    stdout.write("Pilih menu (1-4): ");
+
+    var pilihan = stdin.readLineSync();
+
+    switch (pilihan) {
+      case '1':
+        if (antrian.isPenuh()) {
+          print("\nAntrian sudah penuh!");
+        } else {
+          stdout.write("Masukkan nama pelanggan: ");
+          var nama = stdin.readLineSync()!;
+          antrian.tambahPelanggan(nama);
+        }
+        break;
+      case '2':
+        var pelanggan = antrian.panggilPelanggan();
+        if (pelanggan != null) {
+          print("\nPelanggan $pelanggan dipanggil");
+        }
+        break;
+      case '3':
+        antrian.tampilkanAntrian();
+        break;
+      case '4':
+        print("Program selesai");
+        return;
+      default:
+        print("Pilihan tidak valid");
+    }
+  }
+}
